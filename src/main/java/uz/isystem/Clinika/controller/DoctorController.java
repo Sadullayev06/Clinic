@@ -11,6 +11,8 @@ import uz.isystem.Clinika.service.DoctorService;
 @RequestMapping("/doctor")
 public class DoctorController {
 
+    //salom bolla
+
     @Autowired
     private DoctorService doctorService;
 
