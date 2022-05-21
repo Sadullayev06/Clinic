@@ -2,9 +2,11 @@ package uz.isystem.Clinika.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import uz.isystem.Clinika.dto.VisitDto;
 import uz.isystem.Clinika.model.Visit;
 import uz.isystem.Clinika.repository.VisitRepository;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Optional;
 
@@ -19,19 +21,31 @@ public class VisitService {
     private PatientService patientService;
 
 
-    public Visit create(Visit visit) {
+    public VisitDto create(VisitDto dto) {
+        Visit visit = new Visit();
         //TODO:check doctor
-        doctorService.check(visit.getDoctorId());
+        doctorService.check(dto.getDoctorId());
+        visit.setDoctorId(dto.getDoctorId());
         //TODO:check patient
-        patientService.getEntity(visit.getPatientId());
-
-        visit.setStatus(true);
+        patientService.getEntity(dto.getPatientId());
+        visit.setPatientId(dto.getPatientId());
+        visit.setDiagnosis(dto.getDiagnosis());
         visit.setCreateAt(LocalDateTime.now());
+        visit.setStatus(true);
         visitRepository.save(visit);
-        return visit;
+        return dto;
     }
 
-    public Visit get(Integer id) {
+    public VisitDto get(Integer id){
+        Visit visit = getEntity(id);
+        VisitDto visitDto = new VisitDto();
+        visitDto.setPatient(patientService.get(visit.getPatientId()));
+        visitDto.setDoctor(doctorService.get(visit.getDoctorId()));
+        visitDto.setDiagnosis(visit.getDiagnosis());
+        return visitDto;
+    }
+
+    public Visit getEntity(Integer id) {
         Optional <Visit> optional = visitRepository.findById(id);
         if (optional.isEmpty()){
             throw new  IllegalArgumentException("User not found");
@@ -39,22 +53,22 @@ public class VisitService {
         return optional.get();
     }
 
-    public Visit update(Integer id, Visit visit) {
-        Visit old  = get(id);
-        //TODO:check doctor
-        doctorService.check(visit.getDoctorId());
-        old.setDoctorId(visit.getDoctorId());
-        //TODO:check patient
-        patientService.getEntity(visit.getPatientId());
-        old.setPatientId(visit.getPatientId());
+    public boolean update(Integer id, VisitDto dto) {
 
-        old.setDiagnosis(visit.getDiagnosis());
-        visitRepository.save(old);
-        return old;
+        Visit visit = getEntity(id);
+        //TODO:check doctor
+        doctorService.check(dto.getDoctorId());
+        visit.setDoctorId(dto.getDoctorId());
+        //TODO:check patient
+        patientService.getEntity(dto.getPatientId());
+        visit.setPatientId(dto.getPatientId());
+        visit.setDiagnosis(dto.getDiagnosis());
+        visitRepository.save(visit);
+        return true;
     }
 
     public boolean delete(Integer id) {
-        Visit visit = get(id);
+        Visit visit = getEntity(id);
         visitRepository.delete(visit);
         return true;
     }

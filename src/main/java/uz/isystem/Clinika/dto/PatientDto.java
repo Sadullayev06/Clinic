@@ -24,7 +24,7 @@ public class PatientDto {
     @NotNull(message = ("Invalid birthday"))
     private LocalDate birthday;
     @NotBlank(message = ("Invalid contact"))
-    @Size(min = 12, max = 13, message = ("contactni togri kirit *** 12-13 oraligida"))
+    @Size(min = 12, max = 13, message = ("contactni togri kirit 12-13 oraligida"))
     private String contact;
     private Integer age;
     private Boolean status;
