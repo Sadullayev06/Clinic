@@ -12,6 +12,7 @@ import uz.isystem.Clinika.service.DoctorService;
 public class DoctorController {
 
     //salom bolla
+    //qales
 
     @Autowired
     private DoctorService doctorService;
