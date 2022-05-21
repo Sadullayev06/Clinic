@@ -14,6 +14,7 @@ public class DoctorController {
     //salom bolla
     //qales
     //nima gap
+    //tinchuxa
 
     @Autowired
     private DoctorService doctorService;
