@@ -8,6 +8,10 @@ import uz.isystem.Clinika.service.DoctorService;
 
 import javax.validation.Valid;
 
+//oka cho`tki
+//yengisini qachon boshlimiza
+
+
 @RestController
 @RequestMapping("/doctor")
 public class DoctorController {
