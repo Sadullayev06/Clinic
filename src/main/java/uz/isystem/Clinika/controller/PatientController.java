@@ -49,35 +49,4 @@ public class PatientController {
         return ResponseEntity.ok(result);
     }
 
-    /*@PostMapping("/create")
-    public ResponseEntity<?> create(@RequestBody @Valid PatientDto patient) {
-        PatientDto result = patientService.create(patient);
-        return ResponseEntity.ok(result);
-    }
-
-    @GetMapping("/{id}")
-    public ResponseEntity<?> get(@PathVariable("id") Integer id) {
-        PatientDto result = patientService.get(id);
-        return ResponseEntity.ok(result);
-    }
-
-    @PutMapping("/{id}")
-    public ResponseEntity<?> update(@PathVariable("id") Integer id,
-                                    @RequestBody @Valid PatientDto patientDto) {
-        boolean result = patientService.update(id, patientDto);
-        return ResponseEntity.ok(result);
-    }
-
-    @DeleteMapping("/{id}")
-    public ResponseEntity<?> delete(@PathVariable("id") Integer id) {
-        boolean result = patientService.delete(id);
-        return ResponseEntity.ok(result);
-    }
-
-    @GetMapping("/{id}")
-    public ResponseEntity<?> getAll(@RequestParam("s") Integer size,
-                                    @RequestParam("p") Integer page){
-        List<PatientDto> result = patientService.findAllByPage(page,size);
-        return ResponseEntity.ok(result);
-    }*/
 }

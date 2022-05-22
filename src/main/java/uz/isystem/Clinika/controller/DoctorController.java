@@ -10,6 +10,7 @@ import javax.validation.Valid;
 
 //oka cho`tki
 //yengisini qachon boshlimiza
+//boshlemiz
 
 
 @RestController
@@ -44,39 +45,4 @@ public class DoctorController {
         boolean result = doctorService.delete(id);
         return ResponseEntity.ok(result);
     }
-
-    /*@GetMapping("/{id}")
-    public ResponseEntity<?> getAll(@RequestParam("s") Integer size,
-                                    @RequestParam("p") Integer page){
-        List<DoctorDto> result = doctorService.findAllByPage(page,size);
-        return ResponseEntity.ok(result);
-    }*/
-
-
-    /*@PostMapping("/create")
-    public ResponseEntity<?> create(@RequestBody Doctor doctor){
-        Doctor result = doctorService.create(doctor);
-        return ResponseEntity.ok(result);
-    }
-
-
-    @GetMapping("/{id}")
-    public ResponseEntity<?> get(@PathVariable("id") Integer id){
-        Doctor result = doctorService.get(id);
-        return ResponseEntity.ok(result);
-    }
-
-
-    @PutMapping("/{id}")
-    public ResponseEntity<?> update(@PathVariable("id") Integer id,
-                                    @RequestBody Doctor doctor){
-        Doctor result = doctorService.update(id,doctor);
-        return ResponseEntity.ok(result);
-    }
-
-    @DeleteMapping("/{id}")
-    public ResponseEntity<?> delete(@PathVariable("id") Integer id){
-        boolean result = doctorService.delete(id);
-        return ResponseEntity.ok(result);
-    }*/
 }

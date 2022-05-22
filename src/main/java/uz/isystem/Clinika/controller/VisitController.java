@@ -4,7 +4,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import uz.isystem.Clinika.dto.VisitDto;
-import uz.isystem.Clinika.model.Visit;
 import uz.isystem.Clinika.service.DoctorService;
 import uz.isystem.Clinika.service.PatientService;
 import uz.isystem.Clinika.service.VisitService;

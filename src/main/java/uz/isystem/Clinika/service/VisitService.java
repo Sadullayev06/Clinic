@@ -6,7 +6,6 @@ import uz.isystem.Clinika.dto.VisitDto;
 import uz.isystem.Clinika.model.Visit;
 import uz.isystem.Clinika.repository.VisitRepository;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Optional;
 
