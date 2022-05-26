@@ -19,12 +19,11 @@ public class DoctorDto {
     private Integer id;
     @NotBlank(message = ("Ismda xatolik"))
     private String name;
-    @NotNull(message = ("Familiya mavjud bolishi kerak"))
-    @NotEmpty(message = ("Familiyasi bosh bolishi mumkin emas"))
+    @NotBlank(message = ("Familiyasida xatolik togri kirit"))
     private String surname;
-    @NotBlank(message = ("Invalit direction"))
+    @NotBlank(message = ("Yonalishda xatolik"))
     private String direction;
-    @NotBlank(message = ("Invalid contact"))
+    @NotBlank(message = ("Kontaktni togri kirit"))
     @Size(min=12,max = 13,message = ("Contactni togri kirit 12-13 oraligida"))
     private String contact;
     private Integer experience;

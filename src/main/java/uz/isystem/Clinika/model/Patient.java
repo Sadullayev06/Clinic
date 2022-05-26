@@ -35,4 +35,6 @@ public class Patient {
 
     @Column(name = ("update_at"))
     private LocalDateTime updateAt;
+
+    private LocalDateTime deleteAt;
 }

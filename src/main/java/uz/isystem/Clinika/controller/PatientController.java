@@ -5,6 +5,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import uz.isystem.Clinika.dto.PatientDto;
 
+import uz.isystem.Clinika.model.PatientFilterDto;
 import uz.isystem.Clinika.service.PatientService;
 
 import javax.validation.Valid;
@@ -49,4 +50,9 @@ public class PatientController {
         return ResponseEntity.ok(result);
     }
 
+    @GetMapping("/filter")
+    public ResponseEntity<?> filter(@RequestBody PatientFilterDto patientFilterDto){
+        List<PatientDto> result = patientService.filter(patientFilterDto);
+        return ResponseEntity.ok(result);
+    }
 }

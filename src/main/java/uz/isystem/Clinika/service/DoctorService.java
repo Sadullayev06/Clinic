@@ -55,7 +55,7 @@ public class DoctorService {
     }
 
     public Doctor check(Integer id) {
-        Optional<Doctor> optional = doctorRepository.findById(id);
+        Optional<Doctor> optional = doctorRepository.findById  (id);
         if (optional.isEmpty()){
             throw new BadRequest("Doctor not found");//throw new BadRequest("Doctor not found");
         }

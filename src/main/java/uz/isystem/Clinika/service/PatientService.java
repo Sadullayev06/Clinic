@@ -4,11 +4,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 import uz.isystem.Clinika.dto.PatientDto;
 import uz.isystem.Clinika.exception.BadRequest;
 import uz.isystem.Clinika.model.Patient;
+import uz.isystem.Clinika.model.PatientFilterDto;
 import uz.isystem.Clinika.repository.PatientRepository;
+
+import javax.persistence.criteria.Predicate;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.LinkedList;
@@ -87,4 +91,36 @@ public class PatientService {
         return response;
     }
 
+    public List<PatientDto> filter(PatientFilterDto dto) {
+        String sortBy = dto.getSortBy();
+        if (sortBy == null || sortBy.isEmpty()){
+            sortBy = "createdAt";
+        }
+        Pageable pageable = PageRequest.of(dto.getPage(), dto.getSize(), dto.getDirection(), sortBy);
+        List<Predicate> predicateList = new LinkedList<>();
+        Specification<Patient> specification = ((((root, query, criteriaBuilder) -> {
+            if (dto.getName() != null){
+                predicateList.add(criteriaBuilder.like(root.get("name"),dto.getName()));
+            }
+            if (dto.getSurname() != null){
+                predicateList.add(criteriaBuilder.like(root.get("surname"),"%" + dto.getSurname() + "%"));
+            }
+            if (dto.getStartBirth() != null && dto.getEndBirth() != null){
+                predicateList.add(criteriaBuilder.between(root.get("birthday"),"%"+dto.getStartBirth(),dto.getEndBirth()+"%"));
+            }
+            if (dto.getContact() != null){
+                predicateList.add(criteriaBuilder.like(root.get("contact"),"%"+ dto.getContact()+"%"));
+            }
+            return criteriaBuilder.and(predicateList.toArray(new javax.persistence.criteria.Predicate[0]));
+        })));
+        List<PatientDto> resultList = new LinkedList<>();
+        Page<Patient> patientList = patientRepository.findAll(specification,pageable);
+        for (Patient patient:patientList) {
+            if (patient.getDeleteAt() == null){
+                PatientDto patientDto = new PatientDto();
+                resultList.add(patientDto);
+            }
+        }
+        return resultList;
+    }
 }
