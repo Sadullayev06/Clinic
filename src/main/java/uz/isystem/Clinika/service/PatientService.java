@@ -70,7 +70,6 @@ public class PatientService {
         }
         return optional.get();
     }
-
     private void convertDtoToEntity(PatientDto dto, Patient entity) {
         entity.setName(dto.getName());
         entity.setSurname(dto.getSurname());
