@@ -16,7 +16,7 @@ import java.time.LocalDateTime;
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class PatientDto {
     private Integer id;
-    @NotBlank(message = ("Isimda hatolik"))
+    @NotBlank(message = ("Ismda hatolik"))
     private String name; // ""
     @NotNull(message = ("Familiyasi mavjud bolish kerak"))
     @NotEmpty(message = ("Familiyasi bosh bolishi mumkun emas"))
